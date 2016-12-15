@@ -1,40 +1,8 @@
 import {Component} from '@angular/core';
 import {Hero} from './hero';
 
-//创建英雄数据源（数组）
-const HEROES : Hero[] = [
-  {
-    id: 11,
-    name: 'Mr. Nice'
-  }, {
-    id: 12,
-    name: 'Narco'
-  }, {
-    id: 13,
-    name: 'Bombasto'
-  }, {
-    id: 14,
-    name: 'Celeritas'
-  }, {
-    id: 15,
-    name: 'Magneta'
-  }, {
-    id: 16,
-    name: 'RubberMan'
-  }, {
-    id: 17,
-    name: 'Dynama'
-  }, {
-    id: 18,
-    name: 'Dr IQ'
-  }, {
-    id: 19,
-    name: 'Magma'
-  }, {
-    id: 20,
-    name: 'Tornado'
-  }
-];
+//引入HeroService服务
+import {HeroService} from './hero.service';
 
 @Component({
   selector: 'my-app',
@@ -116,7 +84,8 @@ const HEROES : Hero[] = [
 })
 //显示我们的英雄
 export class AppComponent {
-
+  // 注入HeroService 1、添加一个构造函数，并定义一个私有属性 2、添加组件的providers元数据
+  constructor(private heroService : HeroService) {}
   title = 'Tour of Heroes';
   // 暴露英雄 我们在AppComponent上创建一个公共属性，用来暴露这些英雄，以供绑定。
   // 我们并不需要明确定义heroes属性的数据类型，TypeScript 能从HEROES数组中推断出来。
