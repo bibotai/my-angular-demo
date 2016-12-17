@@ -79,19 +79,30 @@ import {HeroService} from './hero.service';
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
-`]
+`],
+  // 在Component中创建注入提供商  providers数组告诉
+  // Angular，当它创建新的AppComponent组件时，也要创建一个HeroService的新实例。
+  providers: [HeroService]
 
 })
+
 //显示我们的英雄
 export class AppComponent {
   // 注入HeroService 1、添加一个构造函数，并定义一个私有属性 2、添加组件的providers元数据
   constructor(private heroService : HeroService) {}
+
   title = 'Tour of Heroes';
   // 暴露英雄 我们在AppComponent上创建一个公共属性，用来暴露这些英雄，以供绑定。
   // 我们并不需要明确定义heroes属性的数据类型，TypeScript 能从HEROES数组中推断出来。
-  heroes = HEROES;
-  //暴露选中的英雄
+  heroes : Hero[];
+  // 暴露选中的英雄
   selectedHero : Hero;
+  //添加一个从heroService服务中获取英雄的方法
+  getHeroes() : void {
+    this.heroes = this
+      .heroService
+      .getHeroes();
+  }
   //添加一个onSelect方法，用于将用户点击的英雄赋给selectedHero属性
   onSelect(hero : Hero) : void {
     this.selectedHero = hero;
