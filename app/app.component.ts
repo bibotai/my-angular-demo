@@ -3,6 +3,8 @@ import {Hero} from './hero';
 
 //引入HeroService服务
 import {HeroService} from './hero.service';
+//引入OnInit接口
+import {OnInit} from '@angular/core';
 
 @Component({
   selector: 'my-app',
@@ -87,7 +89,7 @@ import {HeroService} from './hero.service';
 })
 
 //显示我们的英雄
-export class AppComponent {
+export class AppComponent implements OnInit {
   // 注入HeroService 1、添加一个构造函数，并定义一个私有属性 2、添加组件的providers元数据
   constructor(private heroService : HeroService) {}
 
@@ -97,11 +99,18 @@ export class AppComponent {
   heroes : Hero[];
   // 暴露选中的英雄
   selectedHero : Hero;
-  //添加一个从heroService服务中获取英雄的方法
+
+  //添加一个从heroService服务中获取英雄的方法 基于承诺 并承诺事情解决再行动
   getHeroes() : void {
-    this.heroes = this
+    // this.heroes = this   .heroService   .getHeroes();
+    this
       .heroService
-      .getHeroes();
+      .getHeroesSlowly()
+      .then(heroes => this.heroes = heroes)
+  }
+  //实现OnInit接口获取英雄数据
+  ngOnInit() : void {
+    this.getHeroes();
   }
   //添加一个onSelect方法，用于将用户点击的英雄赋给selectedHero属性
   onSelect(hero : Hero) : void {

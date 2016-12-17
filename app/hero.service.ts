@@ -8,8 +8,13 @@ import {HEROES} from './mock-heroes';
 // 可注入的服务 我们导入了 Angular 的Injectable函数，并作为@Injectable()装饰器使用这个函数
 @Injectable()
 export class HeroService {
-    // 添加一个getHeros的方法
-    getHeroes() : Hero[] {
-        return HEROES;
+    // 添加一个getHeros的方法 返回承诺
+    getHeroes() : Promise < Hero[] > {
+        return Promise.resolve(HEROES);
     } // stub
+    //模拟网络延迟
+    getHeroesSlowly() : Promise < Hero[] > {
+        return new Promise < Hero[] > (resolve => setTimeout(resolve, 2000)) // delay 2 seconds
+            .then(() => this.getHeroes());
+    }
 }
