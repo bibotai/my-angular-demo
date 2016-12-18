@@ -11,16 +11,21 @@ import {HeroDetailComponent} from './hero-detail.component';
 import {HeroesComponent} from './heroes.component';
 
 import {HeroService} from './hero.service';
+//添加仪表盘
+import {DashboardComponent} from './dashboard.component';
+//导入路由模块
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   imports: [
-    BrowserModule, FormsModule
+    BrowserModule, FormsModule, AppRoutingModule
   ], //把FormsModule添加到NgModule装饰器的imports数组中
   declarations: [
-    AppComponent, HeroDetailComponent, HeroesComponent
+    AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent
   ],
   bootstrap: [AppComponent],
   // 添加HeroService到AppModule的providers数组中，因为我们的每一个视图都需要它。
   providers: [HeroService]
 })
+
 export class AppModule {}

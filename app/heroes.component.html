@@ -1,0 +1,25 @@
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <!-- each hero goes here -->
+  <!-- 添加内置指令来遍历英雄并显示在页面中 -->
+  <!-- 并在此添加click事件绑定 -->
+  <!-- 添加属性绑定：[class.selected]="hero === selectedHero" -->
+  <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+<!-- 把该组件的selectedHero属性绑定到HeroDetailComponent组件的hero属性上 -->
+<!--hero是属性绑定的目标 它位于等号 (=) 左边方括号中-->
+<!--Angular 希望我们把目标属性声明为组件的输入属性，否则，Angular 会拒绝绑定，并抛出错误。-->
+<!--因此需要在hero-hero-detail.component.ts中使用@Input装饰器把属性声明称输入属性-->
+<!--<my-hero-detail [hero]="selectedHero"></my-hero-detail>-->
+<!--添加 mini 版英雄详情-->
+<div *ngIf="selectedHero">
+  <h2>
+    <!--使用大写管道格式化-->
+    <!--管道擅长做下列工作：格式化字符串、金额、日期和其它显示数据。 Angular 自带了一些管道，我们也可以写自己的管道-->
+    {{selectedHero.name | uppercase}} is my hero
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
+<!--ngIf和ngFor被称为“结构型指令”，因为它们可以修改部分 DOM 的结构。 换句话说，它们让 Angular 在 DOM 中显示内容的方式结构化了。-->

@@ -17,4 +17,7 @@ export class HeroService {
         return new Promise < Hero[] > (resolve => setTimeout(resolve, 2000)) // delay 2 seconds
             .then(() => this.getHeroes());
     }
+    getHero(id : number) : Promise < Hero > {
+        return Promise.resolve(HEROES.find(hero => hero.id == id));
+    }
 }
