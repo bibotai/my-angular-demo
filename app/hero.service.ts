@@ -13,11 +13,19 @@ export class HeroService {
         return Promise.resolve(HEROES);
     } // stub
     //模拟网络延迟
+
     getHeroesSlowly() : Promise < Hero[] > {
         return new Promise < Hero[] > (resolve => setTimeout(resolve, 2000)) // delay 2 seconds
             .then(() => this.getHeroes());
     }
     getHero(id : number) : Promise < Hero > {
         return Promise.resolve(HEROES.find(hero => hero.id == id));
+    }
+
+    xxx() {
+        return new Promise((resolve, reject) => {
+
+            resolve('dddd');
+        })
     }
 }
